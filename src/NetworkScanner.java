@@ -68,7 +68,7 @@ public class NetworkScanner {
 						.getImage(
 								NetworkScanner.class
 										.getResource("/com/sun/java/swing/plaf/windows/icons/Computer.gif")));
-		frame.setTitle("Website Thief（获得网页源代码）");
+		frame.setTitle("Website Thief（获得网页源代码） v1.01");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setBackground(Color.PINK);
 		frame.setBounds(100, 100, 647, 463);
@@ -92,7 +92,7 @@ public class NetworkScanner {
 		
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-
+				
 				printTextArea.setText("请求超时。");
 				printString = "";
 				String address = inputTextField.getText();
@@ -119,6 +119,7 @@ public class NetworkScanner {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				System.gc();
 			}
 		});
 		button.setBounds(548, 12, 83, 23);

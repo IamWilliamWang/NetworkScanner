@@ -29,7 +29,7 @@ import java.awt.Window.Type;
 
 public class NetworkScanner {
 
-	private JFrame frmNetThief;
+	private JFrame frame;
 	private JTextField inputTextField;
 	private String printString;
 
@@ -41,7 +41,7 @@ public class NetworkScanner {
 			public void run() {
 				try {
 					NetworkScanner window = new NetworkScanner();
-					window.frmNetThief.setVisible(true);
+					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -60,31 +60,32 @@ public class NetworkScanner {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frmNetThief = new JFrame();
-		frmNetThief.setResizable(false);
-		frmNetThief
+		frame = new JFrame();
+		frame.setResizable(false);
+		frame
 				.setIconImage(Toolkit
 						.getDefaultToolkit()
 						.getImage(
 								NetworkScanner.class
 										.getResource("/com/sun/java/swing/plaf/windows/icons/Computer.gif")));
-		frmNetThief.setTitle("Website Thief（获得网页源代码）");
-		frmNetThief.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmNetThief.setBackground(Color.PINK);
-		frmNetThief.setBounds(100, 100, 647, 463);
-		frmNetThief.getContentPane().setLayout(null);
+		frame.setTitle("Website Thief（获得网页源代码）");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setBackground(Color.PINK);
+		frame.setBounds(100, 100, 647, 463);
+		frame.getContentPane().setLayout(null);
 
 		inputTextField = new JTextField();
+		inputTextField.setText("http://www.baidu.com");
 		inputTextField.setFont(new Font("Microsoft JhengHei UI Light",
 				Font.PLAIN, 14));
-		inputTextField.setBounds(114, 12, 424, 21);
-		frmNetThief.getContentPane().add(inputTextField);
+		inputTextField.setBounds(114, 12, 326, 21);
+		frame.getContentPane().add(inputTextField);
 		inputTextField.setColumns(10);
 
 		JLabel tipLabel = new JLabel("请输入网址：");
 		tipLabel.setFont(new Font("仿宋", Font.PLAIN, 18));
 		tipLabel.setBounds(10, 10, 123, 22);
-		frmNetThief.getContentPane().add(tipLabel);
+		frame.getContentPane().add(tipLabel);
 
 		JButton button = new JButton("确定");
 		final JTextArea printTextArea = new JTextArea();
@@ -121,17 +122,26 @@ public class NetworkScanner {
 			}
 		});
 		button.setBounds(548, 12, 83, 23);
-		frmNetThief.getContentPane().add(button);
+		frame.getContentPane().add(button);
 		JScrollPane jsp = new JScrollPane();
 		jsp.setBackground(Color.PINK);
 
 		jsp.setBounds(10, 42, 621, 382);
-		frmNetThief.getContentPane().add(jsp);
+		frame.getContentPane().add(jsp);
 		
 				
 				jsp.setViewportView(printTextArea);
 				printTextArea.setEditable(false);
 				printTextArea.setText("若出现乱码请重新按下确定键，正常情况会有几秒的停顿（取决于网络情况）");
 				printTextArea.setBackground(Color.PINK);
+				
+				JButton clearButton = new JButton("网址清空");
+				clearButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						inputTextField.setText("");
+					}
+				});
+				clearButton.setBounds(450, 12, 88, 23);
+				frame.getContentPane().add(clearButton);
 	}
 }
